@@ -110,7 +110,7 @@ public class FormAlterarAluno extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTnome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jTemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -133,10 +133,10 @@ public class FormAlterarAluno extends javax.swing.JFrame {
        CadastrarUsuario cdu = new CadastrarUsuario();        
        u.setId_usuario(Integer.valueOf(jTpesquisar.getText())); 
        cdu.PesquisarRegistro(u);
-        jTnome.setText(u.getNome());
-        jTemail.setText(u.getEmail());  
-        jTperfil.setText(u.getPerfil());
-        jTpesquisar.setEditable(false);                 
+       jTnome.setText(u.getNome());
+       jTemail.setText(u.getEmail());  
+       jTperfil.setText(u.getPerfil());
+       jTpesquisar.setEditable(false);                 
               
       } 
       catch (Exception e){
@@ -150,15 +150,17 @@ public class FormAlterarAluno extends javax.swing.JFrame {
             
       Usuario u = new  Usuario();
       CadastrarUsuario cdu = new CadastrarUsuario();
-//    u.setId_usuario(Integer.valueOf(jTpesquisar.getText()));
+      u.setId_usuario(Integer.valueOf(jTpesquisar.getText()));
       u.setNome(jTnome.getText());
       u.setEmail(jTemail.getText());
-//    cdu.editarAluno(a); 
+      u.setPerfil(jTperfil.getText());
+      cdu.editarUsuario(u);
       
       jTnome.setText("");
       jTemail.setText("");
+      jTperfil.setText("");
       jTpesquisar.setText("");
-       jTpesquisar.setEditable(true); 
+      jTpesquisar.setEditable(true); 
       jTpesquisar.requestFocus();
       }catch(Exception e){
         JOptionPane.showMessageDialog(this,"Erro de : " + e.getMessage());

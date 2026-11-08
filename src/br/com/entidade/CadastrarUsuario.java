@@ -32,7 +32,7 @@ public class CadastrarUsuario extends DAO {
             pst.setString(4, u.getPerfil());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
             pst.execute();
-            JOptionPane.showMessageDialog(null, "Aluno Inserido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Usuario Inserido com sucesso!");
         }
 
         fecharBanco();
@@ -66,7 +66,7 @@ public class CadastrarUsuario extends DAO {
 			u.setId_usuario(tr.getInt("id_usuario"));
 			u.setNome(tr.getString("nome"));
 			u.setEmail(tr.getString("email"));
-                        u.setPerfil("perfil");
+                        u.setPerfil(tr.getString("perfil"));
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");
@@ -78,7 +78,7 @@ public class CadastrarUsuario extends DAO {
 		System.out.println("Erro " + e.getMessage());
 	}
     }
-}
+
 
 //    public ArrayList<Aluno> PesquisarTudo() throws Exception {
 //        ArrayList<Aluno> alunos = new ArrayList<Aluno>();
@@ -101,17 +101,19 @@ public class CadastrarUsuario extends DAO {
 //        }
 //        return alunos;
 //    } 
-//    // Metodo da Classe Entidade
-//public void editarAluno(Aluno a) throws Exception {
-//        abrirBanco();
-//        //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
-//        String query = "UPDATE aluno set nome = ?, email = ? where codigo = ?";
-//        pst = (PreparedStatement) con.prepareStatement(query);
-//        pst.setString(1, a.getNome());
-//        pst.setString(2, a.getEmail());
-//        pst.setInt(3, a.getCodigo());
-//        pst.executeUpdate();
-//        JOptionPane.showMessageDialog(null, "Aluno Alterado com sucesso!");
-//        fecharBanco();
-//    }
-//} 
+   
+public void editarUsuario(Usuario u) throws Exception {
+        abrirBanco();
+        //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
+        String query = "UPDATE usuario set nome = ?, email = ?, perfil = ?, where id_usuario = ?";
+        pst = (PreparedStatement) con.prepareStatement(query);
+        pst.setString(1, u.getNome());
+        pst.setString(2, u.getEmail());
+        pst.setString(3, u.getPerfil());
+        pst.setInt(4, u.getId_usuario());
+        pst.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Usuário Alterado com sucesso!");
+        fecharBanco();
+    }
+} 
+

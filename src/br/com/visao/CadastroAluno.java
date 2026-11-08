@@ -117,7 +117,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         us.setNome(jTnome.getText());
         us.setEmail(jTemail.getText());
         us.setSenha(jTsenha.getText());
-        us.setPerfil("Usuário");
+        us.setPerfil("Usuário12");
         CadastrarUsuario cdu = new CadastrarUsuario();
         try {
             cdu.inserir(us);
