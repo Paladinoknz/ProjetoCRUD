@@ -113,11 +113,11 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
 
     private void jBcadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadastrarActionPerformed
         // TODO add your handling code here:
-        Usuario us = new Usuario();
+        Usuario us = new Usuario(); TelaLogin TL = new TelaLogin();
         us.setNome(jTnome.getText());
         us.setEmail(jTemail.getText());
         us.setSenha(jTsenha.getText());
-        us.setPerfil("Usuário12");
+        us.setPerfil("Usuário");
         CadastrarUsuario cdu = new CadastrarUsuario();
         try {
             cdu.inserir(us);
@@ -125,6 +125,9 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
             jTemail.setText("");
             jTsenha.setText("");
             jTnome.requestFocus();
+            this.dispose();
+            TL.setVisible(true);
+            
         } catch (Exception ex) {
             Logger.getLogger(CadastrarUsuario.class.getName()).log(Level.SEVERE, "Erro ao tentar cadastrar!", ex);
         }

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class CadastrarUsuario extends DAO {
@@ -79,15 +81,15 @@ public class CadastrarUsuario extends DAO {
 	}
     }
    
-     public void PesquisarLogin(Usuario u) throws Exception {
+     public int PesquisarLogin(Usuario u) throws Exception {
 	try {
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
 		abrirBanco();
                 //Prepara a query que sera enviada para o banco
-		String query = "select id_usuario,nome,email,perfil FROM usuario where email=?";
+		String query = "select id_usuario,nome,email,perfil, senha FROM usuario where email=?";
                 //faz a conexao com o banco esperando o "?" ser preenchido
 		pst = (PreparedStatement) con.prepareStatement(query);
-                //Preenche o primeiro(e unico) "?" pelo retorno do objeto u que traz o ID do usuario 
+                //Preenche os "?" pelo retorno do objeto (Usuario u) que traz o email do usuario 
 		pst.setString(1, u.getEmail());
                 //executa a query de fato e guarda a resposta do banco
 		ResultSet tr = pst.executeQuery();
@@ -96,16 +98,24 @@ public class CadastrarUsuario extends DAO {
 			u.setId_usuario(tr.getInt("id_usuario"));
 			u.setNome(tr.getString("nome"));
 			u.setEmail(tr.getString("email"));
-                        u.setPerfil(tr.getString("perfil"));
-                //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
+                        u.setPerfil(tr.getString("perfil"));//pegamos isso para saber se o usuario tera acesso a tela toda ou limitada.
+                        u.setSenha(tr.getString("senha"));//pegamos a senha nesse metodo para comparar com a senha digitada na tela de login, isso isso 
+                        //nao conseguimos fazer a comparaçao que vem da tela.
+                    
+                        return 1;//o retorno aqui para que na tela login tenhamos um retorno de que o usuario existe. 
+                //Se o banco der qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
-			JOptionPane.showMessageDialog(null, "Nenhum login encontrado! ");
+			
+                    JOptionPane.showMessageDialog(null, "Nenhum login encontrado! ");
+                   
 		}
                 
                
 		fecharBanco();
+                return 0;//retorno aqui logo depois do fechar banco pq nao podemos colocar antes dele, paia :(
 	} catch (Exception e) {
 		System.out.println("Erro " + e.getMessage());
+                return 5;
 	}
     }
 

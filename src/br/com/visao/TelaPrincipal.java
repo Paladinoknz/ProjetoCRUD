@@ -5,6 +5,8 @@ package br.com.visao;
 
 
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
+import br.com.controle.Usuario;
+import br.com.entidade.CadastrarUsuario;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -158,12 +160,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(() -> {
-            TelaPrincipal tela = new TelaPrincipal();
+            try{
+            TelaPrincipal tela = new TelaPrincipal(); Usuario us = new Usuario(); CadastrarUsuario cdu = new CadastrarUsuario();
             // Teste mudando para "Admin" ou "Comum" aqui se quiser testar:
-            tela.setPerfilUsuario("Admin");//pegando o get do id usuario e vendo aqui quais funcionalidades estarao disponives na tela principal.
-            tela.setVisible(true);
+            cdu.PesquisarRegistro(us);
+            tela.setPerfilUsuario(us.getPerfil());//pegando o get do id usuario e vendo aqui quais funcionalidades estarao disponives na tela principal.
+            tela.setVisible(true);}
+                catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro de : " + e.getMessage());
+            }
+        
         });
     }
 }

@@ -111,8 +111,24 @@ public class TelaLogin extends javax.swing.JFrame {
        try {
         Usuario us = new Usuario();//criamos aqui um objeto para passar como paramentro no metodo do pesquisarLogin da classe CadastrarUsuario
         CadastrarUsuario cdu = new CadastrarUsuario();//criacao da classe cadastrarUsuario pq ela possui o metood de pesquisar login
+        TelaPrincipal TP = new TelaPrincipal();
         us.setEmail(jTemailLogin.getText()); us.setSenha(jTsenha.getText());//capturamos os registros do usuario
-        cdu.PesquisarLogin(us);//chamamos o metodo para pesquisar o usuario.
+       
+       
+       int retorno = cdu.PesquisarLogin(us);//chamamos o metodo para pesquisar o usuario. E esperamos o retorno
+       
+       //autoexplicativo a essa altura 
+        if(retorno == 1){
+            
+            if(us.getSenha().equals(jTsenha.getText())){
+                TP.setVisible(true);
+                this.dispose();
+                }else{
+                
+                JOptionPane.showMessageDialog(null, "Senha Incorreta!");
+                
+            }
+        }
         
        } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"Erro de : " + e.getMessage());
@@ -125,7 +141,7 @@ public class TelaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         CadastroUsuarioTela cdt = new CadastroUsuarioTela();
         cdt.setVisible(true);
-        
+        this.dispose();
         
     }//GEN-LAST:event_jBcadastrarLoginActionPerformed
 
