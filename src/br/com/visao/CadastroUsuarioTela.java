@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
-public class CadastroAluno extends javax.swing.JFrame {
+public class CadastroUsuarioTela extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroAluno
      */
-    public CadastroAluno() {
+    public CadastroUsuarioTela() {
         initComponents();
     }
 
@@ -168,7 +168,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroAluno().setVisible(true);
+                new CadastroUsuarioTela().setVisible(true);
             }
         });
     }

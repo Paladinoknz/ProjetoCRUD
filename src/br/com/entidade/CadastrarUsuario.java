@@ -78,6 +78,36 @@ public class CadastrarUsuario extends DAO {
 		System.out.println("Erro " + e.getMessage());
 	}
     }
+   
+     public void PesquisarLogin(Usuario u) throws Exception {
+	try {
+            //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
+		abrirBanco();
+                //Prepara a query que sera enviada para o banco
+		String query = "select id_usuario,nome,email,perfil FROM usuario where email=?";
+                //faz a conexao com o banco esperando o "?" ser preenchido
+		pst = (PreparedStatement) con.prepareStatement(query);
+                //Preenche o primeiro(e unico) "?" pelo retorno do objeto u que traz o ID do usuario 
+		pst.setString(1, u.getEmail());
+                //executa a query de fato e guarda a resposta do banco
+		ResultSet tr = pst.executeQuery();
+                //se o banco responder TRUE, siginifca que o usuario existe e ele nos da as colunas(que selecionamos na query) da tabela usuario.
+		if (tr.next()) {
+			u.setId_usuario(tr.getInt("id_usuario"));
+			u.setNome(tr.getString("nome"));
+			u.setEmail(tr.getString("email"));
+                        u.setPerfil(tr.getString("perfil"));
+                //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
+		} else {
+			JOptionPane.showMessageDialog(null, "Nenhum login encontrado! ");
+		}
+                
+               
+		fecharBanco();
+	} catch (Exception e) {
+		System.out.println("Erro " + e.getMessage());
+	}
+    }
 
 
 //    public ArrayList<Aluno> PesquisarTudo() throws Exception {
