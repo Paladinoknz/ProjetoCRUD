@@ -150,10 +150,10 @@ public class FormAlterarAluno extends javax.swing.JFrame {
             
       Usuario u = new  Usuario();
       CadastrarUsuario cdu = new CadastrarUsuario();
-      u.setId_usuario(Integer.valueOf(jTpesquisar.getText()));
       u.setNome(jTnome.getText());
       u.setEmail(jTemail.getText());
       u.setPerfil(jTperfil.getText());
+      u.setId_usuario(Integer.valueOf(jTpesquisar.getText()));
       cdu.editarUsuario(u);
       
       jTnome.setText("");

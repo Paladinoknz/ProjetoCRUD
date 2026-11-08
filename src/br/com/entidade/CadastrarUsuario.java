@@ -105,7 +105,7 @@ public class CadastrarUsuario extends DAO {
 public void editarUsuario(Usuario u) throws Exception {
         abrirBanco();
         //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
-        String query = "UPDATE usuario set nome = ?, email = ?, perfil = ?, where id_usuario = ?";
+        String query = "UPDATE usuario set nome = ?, email = ?, perfil = ? where id_usuario = ?";
         pst = (PreparedStatement) con.prepareStatement(query);
         pst.setString(1, u.getNome());
         pst.setString(2, u.getEmail());
