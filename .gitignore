@@ -1,0 +1,8 @@
+/build/
+/dist/
+/nbproject/private/
+*.jar
+.gradle/
+.settings/
+lib/mysql-connector-j-*/
+bin/
