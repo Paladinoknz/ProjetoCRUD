@@ -121,6 +121,7 @@ public class TelaLogin extends javax.swing.JFrame {
         if(retorno == 1){
             
             if(us.getSenha().equals(jTsenha.getText())){
+                TP.setPerfilUsuario(us.getPerfil());
                 TP.setVisible(true);
                 this.dispose();
                 }else{

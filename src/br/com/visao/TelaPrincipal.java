@@ -34,7 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private JButton btnListar;
     private JButton btnAlterar;
     private JButton btnDeletar;
-
+    private JButton btnExcluirUsuario;
     
     //Iniciando a tela principal 
     public TelaPrincipal() {
@@ -62,7 +62,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         add(painelTopo, BorderLayout.NORTH);
 
         // 2. Painel Central (Grade de Botões Estilizados)
-        JPanel painelCentro = new JPanel(new GridLayout(2, 2, 20, 20)); // Grade 2x2 com espaçamento
+        JPanel painelCentro = new JPanel(new GridLayout(3, 2, 20, 20)); // Grade 2x2 com espaçamento
         painelCentro.setBorder(new EmptyBorder(30, 30, 30, 30));
         painelCentro.setBackground(new Color(245, 246, 250)); // Fundo claro
 
@@ -70,13 +70,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnListar = new JButton("📋 Listar Filmes");
         btnAlterar = new JButton("✏️ Alterar Filme");
         btnDeletar = new JButton("🗑️ Deletar Filme");
+        btnExcluirUsuario = new JButton("👤 Excluir Usuário");
 
         // Estilizando os botões
         estilizarBotao(btnCadastrar, new Color(9, 132, 227));   // Azul
         estilizarBotao(btnListar, new Color(0, 184, 148));      // Verde
         estilizarBotao(btnAlterar, new Color(225, 112, 85));    // Laranja
         estilizarBotao(btnDeletar, new Color(214, 48, 49));     // Vermelho
-
+        estilizarBotao(btnExcluirUsuario, new Color(108, 92, 231));
+        
         // Ações dos botões (chame suas telas aqui)
         btnCadastrar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Cadastro de Filmes...");
@@ -101,12 +103,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
             // FormDeletarFilme da = new FormDeletarFilme();
             // da.setVisible(true);
         });
+        
+        btnExcluirUsuario.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Abrindo Exclusão de Usuário...");
+            // Coloque aqui o nome da sua tela de excluir usuário:
+            // ExcluirUsuarioTela eu = new ExcluirUsuarioTela();
+            // eu.setVisible(true);
+        });
 
         // Adicionando botões ao painel central
         painelCentro.add(btnCadastrar);
         painelCentro.add(btnListar);
         painelCentro.add(btnAlterar);
         painelCentro.add(btnDeletar);
+        painelCentro.add(btnExcluirUsuario); 
 
         add(painelCentro, BorderLayout.CENTER);
     }
@@ -128,13 +138,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     //metodo usado para limitar acesso as demais telas.
     private void aplicarControleDeAcesso() {
         //comparacao para identificar qual usuario que está acessando.
-        if ("Comum".equalsIgnoreCase(perfilUsuario)) {
+        if ("Usuário".equalsIgnoreCase(perfilUsuario)) {
             // Colaborador comum não pode alterar nem deletar
             btnAlterar.setEnabled(false);
             btnAlterar.setBackground(new Color(200, 200, 200)); // Fica cinza
             
             btnDeletar.setEnabled(false);
             btnDeletar.setBackground(new Color(200, 200, 200)); // Fica cinza
+            
+            btnExcluirUsuario.setEnabled(false);
+            btnExcluirUsuario.setBackground(new Color(200, 200, 200));
+            
             
             setTitle("Painel Principal - Colaborador (Acesso Limitado)");
         } else {
@@ -145,9 +159,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             btnDeletar.setEnabled(true);
             btnDeletar.setBackground(new Color(214, 48, 49));
             
+            btnExcluirUsuario.setEnabled(true);
+            btnExcluirUsuario.setBackground(new Color(108, 92, 231));
+            
+            
             setTitle("Painel Principal - Administrador (Acesso Total)");
         }
     }
+
 
     public static void main(String args[]) {
         try {
@@ -167,7 +186,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
             // Teste mudando para "Admin" ou "Comum" aqui se quiser testar:
             cdu.PesquisarRegistro(us);
             tela.setPerfilUsuario(us.getPerfil());//pegando o get do id usuario e vendo aqui quais funcionalidades estarao disponives na tela principal.
-            tela.setVisible(true);}
+            tela.setVisible(true);
+            
+            }
+            
                 catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Erro de : " + e.getMessage());
             }

@@ -40,17 +40,19 @@ public class CadastrarUsuario extends DAO {
         fecharBanco();
     }
 
-//  
-//    public void deletarAluno(Aluno a) throws Exception {
-//        abrirBanco();
-//        String query = "delete from aluno where codigo=?";
-//        pst = (PreparedStatement) con.prepareStatement(query);
-//        pst.setInt(1, a.getCodigo());
-//        pst.execute();
-//        JOptionPane.showMessageDialog(null, "Aluno deletado com sucesso!");
-//        fecharBanco();
-//    }
-//  
+  
+    public void deletarAluno(Usuario u) throws Exception {
+        abrirBanco();
+        String query = "delete from usuario where Id_usuario=?";
+        pst = (PreparedStatement) con.prepareStatement(query);
+        pst.setInt(1, u.getId_usuario());
+        pst.execute();
+        JOptionPane.showMessageDialog(null, "Usuario deletado com sucesso!");
+        fecharBanco();
+    }
+  
+    
+    
    public void PesquisarRegistro(Usuario u) throws Exception {
 	try {
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
