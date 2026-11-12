@@ -51,7 +51,7 @@ public class CadastroUsuarioTela extends javax.swing.JFrame {
             }
         });
 
-        jBcadastrar.setText("Cadastrar Aluno");
+        jBcadastrar.setText("Cadastrar ");
         jBcadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBcadastrarActionPerformed(evt);

@@ -42,6 +42,7 @@ public class CadastrarUsuario extends DAO {
 
   
     public void deletarAluno(Usuario u) throws Exception {
+   
         abrirBanco();
         String query = "delete from usuario where Id_usuario=?";
         pst = (PreparedStatement) con.prepareStatement(query);
@@ -49,11 +50,15 @@ public class CadastrarUsuario extends DAO {
         pst.execute();
         JOptionPane.showMessageDialog(null, "Usuario deletado com sucesso!");
         fecharBanco();
+           
+        
+        
+       
     }
   
     
     
-   public void PesquisarRegistro(Usuario u) throws Exception {
+   public int PesquisarRegistro(Usuario u) throws Exception {
 	try {
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
 		abrirBanco();
@@ -71,16 +76,18 @@ public class CadastrarUsuario extends DAO {
 			u.setNome(tr.getString("nome"));
 			u.setEmail(tr.getString("email"));
                         u.setPerfil(tr.getString("perfil"));
+                        return 1;
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");
 		}
                 
-               
-		fecharBanco();
+               fecharBanco();
+               return 0;
 	} catch (Exception e) {
 		System.out.println("Erro " + e.getMessage());
-	}
+	return 5;
+        }
     }
    
      public int PesquisarLogin(Usuario u) throws Exception {
@@ -122,27 +129,27 @@ public class CadastrarUsuario extends DAO {
     }
 
 
-//    public ArrayList<Aluno> PesquisarTudo() throws Exception {
-//        ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-//        try {
-//            abrirBanco();
-//            String query = "select * FROM aluno";
-//            pst = (PreparedStatement) con.prepareStatement(query);
-//            ResultSet tr = pst.executeQuery();
-//            Aluno a;
-//            while (tr.next()) {
-//                a = new Aluno();
-//                a.setCodigo(tr.getInt("codigo"));
-//                a.setNome(tr.getString("nome"));
-//		a.setEmail(tr.getString("email"));
-//                alunos.add(a);
-//            }
-//            fecharBanco();
-//        } catch (Exception e) {
-//            System.out.println("Erro " + e.getMessage());
-//        }
-//        return alunos;
-//    } 
+    public ArrayList<Usuario> PesquisarTudo() throws Exception {
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+        try {
+            abrirBanco();
+            String query = "select * FROM usuario";
+            pst = (PreparedStatement) con.prepareStatement(query);
+            ResultSet tr = pst.executeQuery();
+            Usuario u;
+            while (tr.next()) {
+                u = new Usuario();
+                u.setId_usuario(tr.getInt("id_usuario"));
+                u.setNome(tr.getString("nome"));
+		u.setEmail(tr.getString("email"));
+                usuarios.add(u);
+            }
+            fecharBanco();
+        } catch (Exception e) {
+            System.out.println("Erro " + e.getMessage());
+        }
+        return usuarios;
+    } 
    
 public void editarUsuario(Usuario u) throws Exception {
         abrirBanco();

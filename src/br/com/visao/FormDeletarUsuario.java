@@ -4,8 +4,10 @@
  */
 package br.com.visao;
 
-import br.com.controle.Aluno;
-import br.com.entidade.ManterAluno;
+//import br.com.controle.Usuario;
+//import br.com.entidade.ManterAluno;
+import br.com.controle.Usuario;
+import br.com.entidade.CadastrarUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,12 +15,12 @@ import java.util.logging.Logger;
  *
  * @author DELL
  */
-public class FormDeletarAluno extends javax.swing.JFrame {
+public class FormDeletarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form FormDeletarAluno
      */
-    public FormDeletarAluno() {
+    public FormDeletarUsuario() {
         initComponents();
     }
 
@@ -77,13 +79,21 @@ public class FormDeletarAluno extends javax.swing.JFrame {
 
     private void jBdeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdeletarActionPerformed
         // TODO add your handling code here:
-        Aluno al = new Aluno();
-        al.setCodigo(Integer.valueOf(jTcodigo.getText()));
-        ManterAluno ma = new ManterAluno();
+        
         try {
-            ma.deletarAluno(al);
+            Usuario us = new Usuario(); //cria um objeto
+            us.setId_usuario(Integer.valueOf(jTcodigo.getText()));//coloca o ID digitado no objeto
+            CadastrarUsuario cdu = new CadastrarUsuario();//Chamamos a classe que tem o metodo de excluir usuariosß
+           
+            
+            if(cdu.PesquisarRegistro(us) == 1){
+            
+                cdu.deletarAluno(us);//chamamos esse metodo
+                
+            }
+            
         } catch (Exception ex) {
-            Logger.getLogger(FormDeletarAluno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FormDeletarUsuario.class.getName()).log(Level.SEVERE, "Erro ao excluir usuario.\nTela DeletarUsuario", ex);
         }
     }//GEN-LAST:event_jBdeletarActionPerformed
 
@@ -117,7 +127,7 @@ public class FormDeletarAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormDeletarAluno().setVisible(true);
+                new FormDeletarUsuario().setVisible(true);
             }
         });
     }

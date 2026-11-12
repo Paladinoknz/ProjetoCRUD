@@ -106,9 +106,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         btnExcluirUsuario.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Exclusão de Usuário...");
-            // Coloque aqui o nome da sua tela de excluir usuário:
-            // ExcluirUsuarioTela eu = new ExcluirUsuarioTela();
-            // eu.setVisible(true);
+            FormDeletarUsuario eu = new FormDeletarUsuario();
+            eu.setVisible(true);
         });
 
         // Adicionando botões ao painel central

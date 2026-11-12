@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author DELL
  */
-public class FormAlterarAluno extends javax.swing.JFrame {
+public class FormAlterarUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form FormAlterarAluno
      */
-    public FormAlterarAluno() {
+    public FormAlterarUsuario {
         initComponents();
     }
 
@@ -210,7 +210,7 @@ public class FormAlterarAluno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormAlterarAluno().setVisible(true);
+                new FormAlterarUsuario().setVisible(true);
             }
         });
     }
