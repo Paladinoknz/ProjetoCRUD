@@ -7,7 +7,7 @@ package br.com.visao;
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
 import br.com.controle.Usuario;
 import br.com.entidade.CadastrarUsuario;
-import br.com.visao.diretor.CadastrarFilme;
+import br.com.visao.filme.CadastrarFilme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
