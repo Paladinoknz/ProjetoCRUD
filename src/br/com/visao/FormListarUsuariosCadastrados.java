@@ -4,8 +4,10 @@
  */
 package br.com.visao;
 
-import br.com.controle.Aluno;
-import br.com.entidade.ManterAluno;
+//import br.com.controle.Aluno;
+import br.com.controle.Usuario;
+import br.com.entidade.CadastrarUsuario;
+//import br.com.entidade.ManterAluno;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author DELL
  */
-public class FormListarAlunos extends javax.swing.JFrame {
+public class FormListarUsuariosCadastrados extends javax.swing.JFrame {
 
     /**
      * Creates new form FormListarAlunos
      */
-    public FormListarAlunos() {
+    public FormListarUsuariosCadastrados() {
         initComponents();
     }
 
@@ -32,10 +34,10 @@ public class FormListarAlunos extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTpesquisar = new javax.swing.JTextField();
+        jTpesquisarID = new javax.swing.JTextField();
         jBpesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTbaluno = new javax.swing.JTable();
+        jTbusuario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,7 +50,7 @@ public class FormListarAlunos extends javax.swing.JFrame {
             }
         });
 
-        jTbaluno.setModel(new javax.swing.table.DefaultTableModel(
+        jTbusuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -64,9 +66,9 @@ public class FormListarAlunos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTbaluno);
-        if (jTbaluno.getColumnModel().getColumnCount() > 0) {
-            jTbaluno.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(jTbusuario);
+        if (jTbusuario.getColumnModel().getColumnCount() > 0) {
+            jTbusuario.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,7 +84,7 @@ public class FormListarAlunos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTpesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTpesquisarID, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jBpesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(58, Short.MAX_VALUE))
@@ -93,7 +95,7 @@ public class FormListarAlunos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTpesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTpesquisarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBpesquisar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,23 +109,50 @@ public class FormListarAlunos extends javax.swing.JFrame {
     private void jBpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBpesquisarActionPerformed
         // TODO add your handling code here:
         try {
-        Aluno a = new Aluno();
-        ManterAluno ca = new ManterAluno();        
-        DefaultTableModel alunopesque = (DefaultTableModel) jTbaluno.getModel();  
-        if (jTpesquisar.getText().equalsIgnoreCase("")){
-        ArrayList<Aluno> alunos = ca.PesquisarTudo();  //Vetor que recebe os Dados Traduzidos
-        for (int i = 0; i < alunos.size(); i++) {                
-            a = alunos.get(i);
-            alunopesque.addRow(new Object[]{a.getCodigo(),a.getNome()});
+        Usuario us = new Usuario();//Objeto usuario
+        CadastrarUsuario ca = new CadastrarUsuario();//objeto que tem os metodos que iremos usar        
+        DefaultTableModel pegador = (DefaultTableModel) jTbusuario.getModel(); //Confesso que nao entendi muito bem pq fazer a conversao aqui 
+       
+        
+       
+        
+        
+        //Le-se se o usuario nao pesquisou nada entao ele quer tudo
+        if (jTpesquisarID.getText().equalsIgnoreCase("")){
+        ArrayList<Usuario> usuariosEncontrados = ca.PesquisarTudo();  //Vetor que recebe os Dados Traduzidos, como o retorno satisfaz a condicao entao segue o baile
+        
+        pegador.setRowCount(0);//Esse metodo aqui simplesmete apaga o que tava escrito antes, pra nao acumular.
+        //o loop aqui vai listando cada usuario e adicionando no "pegador", que ta mais pra um varal com roupa aq
+        //a cada usuario novo, pregamos ele e vamos pro proximo, um embaixo do outro
+        for (int i = 0; i < usuariosEncontrados.size(); i++) {                
+            us = usuariosEncontrados.get(i);
+           
+            pegador.addRow(new Object[]{us.getId_usuario(),us.getNome()});
         } 
+        
+        //le-se se o usuario digitou algo entao ele quer apenas esse algo
         }else{
-          a.setCodigo(Integer.valueOf(jTpesquisar.getText())); 
-          ca.PesquisarRegistro(a);
-          alunopesque.addRow(new Object[]{a.getCodigo(),a.getNome()});
+            pegador.setRowCount(0);
+             //validacao(semppre)
+             //tive que colocar um try aqui pelo fato do metodo ter o thorews ai nao dava p ignorar
+        try{
+        
+          us.setId_usuario(Integer.valueOf(jTpesquisarID.getText()));
+          if(ca.PesquisarRegistro(us) == 1){        
+          ca.PesquisarRegistro(us);
+          pegador.addRow(new Object[]{us.getId_usuario(),us.getNome()});
+        }
+        }catch(Exception e){
+            System.out.println("Erro " + e.getMessage());
+        
+     }
+      
         }
         
-        jTpesquisar.setText(null);
-        jTpesquisar.requestFocus();
+        
+        
+        jTpesquisarID.setText(null);
+        jTpesquisarID.requestFocus();
        }
        catch (Exception e){
             System.out.println("Erro " + e.getMessage());
@@ -160,7 +189,7 @@ public class FormListarAlunos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormListarAlunos().setVisible(true);
+                new FormListarUsuariosCadastrados().setVisible(true);
             }
         });
     }
@@ -169,7 +198,7 @@ public class FormListarAlunos extends javax.swing.JFrame {
     private javax.swing.JButton jBpesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTbaluno;
-    private javax.swing.JTextField jTpesquisar;
+    private javax.swing.JTable jTbusuario;
+    private javax.swing.JTextField jTpesquisarID;
     // End of variables declaration//GEN-END:variables
 }

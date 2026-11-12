@@ -36,6 +36,7 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTcodigo = new javax.swing.JTextField();
         jBdeletar = new javax.swing.JButton();
+        jBmostrarUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,18 +49,30 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
             }
         });
 
+        jBmostrarUsuarios.setText("jButton1");
+        jBmostrarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmostrarUsuariosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBdeletar)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBdeletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBmostrarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +82,9 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addComponent(jBdeletar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBdeletar)
+                    .addComponent(jBmostrarUsuarios))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
@@ -96,6 +111,14 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
             Logger.getLogger(FormDeletarUsuario.class.getName()).log(Level.SEVERE, "Erro ao excluir usuario.\nTela DeletarUsuario", ex);
         }
     }//GEN-LAST:event_jBdeletarActionPerformed
+
+    private void jBmostrarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmostrarUsuariosActionPerformed
+        // TODO add your handling code here:
+        FormListarUsuariosCadastrados TL = new FormListarUsuariosCadastrados();
+        TL.setVisible(true);
+      
+        
+    }//GEN-LAST:event_jBmostrarUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +157,7 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBdeletar;
+    private javax.swing.JButton jBmostrarUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTcodigo;
     // End of variables declaration//GEN-END:variables
