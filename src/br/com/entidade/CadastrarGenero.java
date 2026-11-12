@@ -26,20 +26,28 @@ public class CadastrarGenero extends DAO  {
         String existe = "select id_genero,nome,descricao FROM genero where id_genero=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
         pst.setInt(1, g.getId_genero());//passando como parametro o ID
+        
+        
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
             JOptionPane.showMessageDialog(null, "E-mail ja cadastrado anteriormente!");
+            g.setId_genero(tr.getInt("id_genero"));
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO genero (id_genero,nome,descricao) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
             pst = (PreparedStatement) con.prepareStatement(query);//prepara a query com valores faltando (???)
             //Esses 4 valores aqui preenche o buraco que o prepareStatement está esperando
             pst.setString(1, g.getNome());
-            pst.setString(2, g.getDescrição());
+            pst.setString(2, g.getDescricao());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
             pst.execute();
             JOptionPane.showMessageDialog(null, "Descricão e genêro do filme Inseridas com sucesso!");
+               if (rs.next()) {
+        g.setId_genero(rs.getInt(1)); 
+}
         }
-
+             ResultSet rs = pst.getGeneratedKeys();
+     
+   
         fecharBanco();
     }
      
@@ -78,9 +86,9 @@ public class CadastrarGenero extends DAO  {
                     
 			g.setId_genero(tr.getInt("id_genero"));
 			g.setNome(tr.getString("nome"));
-			g.setDescrição(tr.getString("descricao"));
+			g.setDescricao(tr.getString("descricao"));
             
-                        return 1;
+                        return g.getId_genero();
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");
@@ -102,7 +110,7 @@ public class CadastrarGenero extends DAO  {
         String query = "UPDATE genero set nome = ?, descricao = ? where id_genero = ?";
         pst = (PreparedStatement) con.prepareStatement(query);
         pst.setString(1, g.getNome());
-        pst.setString(2, g.getDescrição());
+        pst.setString(2, g.getDescricao());
         pst.setInt(3, g.getId_genero());
         pst.executeUpdate();
         JOptionPane.showMessageDialog(null, "Descrição Alterada com sucesso!");

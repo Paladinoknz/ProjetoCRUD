@@ -29,6 +29,7 @@ public class CadastrarFilme extends DAO {
             pst.setInt(5, f.getId_diretor());
             pst.setInt(6, f.getId_produtora());
             pst.setInt(7, f.getId_usuario());
+         
             
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
             pst.execute();

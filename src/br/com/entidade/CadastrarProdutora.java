@@ -31,6 +31,7 @@ public class CadastrarProdutora extends DAO  {
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
             JOptionPane.showMessageDialog(null, "E-mail ja cadastrado anteriormente!");
+            p.setId_produtora(tr.getInt("id_produtora"));
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO produtora (id_produtora,nome,pais_origem) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
             pst = (PreparedStatement) con.prepareStatement(query);//prepara a query com valores faltando (???)
@@ -39,9 +40,14 @@ public class CadastrarProdutora extends DAO  {
             pst.setString(2, p.getPais());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
             pst.execute();
+                if (rs.next()) {
+               p.setId_produtora(rs.getInt(1)); 
+}
             JOptionPane.showMessageDialog(null, "Produtora do filme Inserido com sucesso!");
         }
-
+                 ResultSet rs = pst.getGeneratedKeys();
+    
+   
         fecharBanco();
     }
      
@@ -80,7 +86,7 @@ public class CadastrarProdutora extends DAO  {
 			p.setNome(tr.getString("nome"));
 			p.setPais(tr.getString("pais_origem"));
             
-                        return 1;
+                        return p.getId_produtora();
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");

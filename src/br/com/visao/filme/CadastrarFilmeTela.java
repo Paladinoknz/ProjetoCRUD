@@ -5,11 +5,17 @@
 package br.com.visao.filme;
 
 import br.com.controle.Diretor;
+import br.com.controle.Filme;
 import br.com.controle.Genero;
 import br.com.controle.Produtora;
+import br.com.controle.Usuario;
 import br.com.entidade.CadastrarDiretor;
 import br.com.entidade.CadastrarGenero;
 import br.com.entidade.CadastrarProdutora;
+import br.com.entidade.CadastrarUsuario;
+import br.com.entidade.CadastrarFilme;
+
+import com.sun.jdi.IntegerValue;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
 
@@ -17,14 +23,14 @@ import javax.swing.JOptionPane;
  *
  * @author ubuntu
  */
-public class CadastrarFilme extends javax.swing.JFrame {
+public class CadastrarFilmeTela extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastrarFilme.class.getName());
 
     /**
      * Creates new form CadastrarFilme
      */
-    public CadastrarFilme() {
+    public CadastrarFilmeTela() {
         initComponents();
     }
 
@@ -196,20 +202,41 @@ public class CadastrarFilme extends javax.swing.JFrame {
         // TODO add your handling code here:
        try{
            
-        CadastrarDiretor cd = new CadastrarDiretor(); CadastrarGenero cg = new CadastrarGenero(); CadastrarProdutora cp = new CadastrarProdutora();
-        Diretor d = new Diretor(); Genero g = new Genero();  Produtora p = new Produtora();
+        CadastrarDiretor cd = new CadastrarDiretor(); CadastrarGenero cg = new CadastrarGenero(); CadastrarUsuario cdu = new CadastrarUsuario();
+        CadastrarProdutora cp = new CadastrarProdutora(); CadastrarFilme cf = new CadastrarFilme();
         
+        Diretor d = new Diretor(); Genero g = new Genero();  Produtora p = new Produtora(); Filme f = new Filme(); Usuario us = new Usuario();
+        
+        
+     
         
         p.setPais(jTpais_produtora.getText());
         p.setNome(jTnome_produtora.getText());
         g.setNome(jCgeneros.getSelectedItem().toString());
-        g.setDescrição(jTdescricao_filme.getText());
+        g.setDescricao(jTdescricao_filme.getText());
         d.setNome(jTnome_diretor.getText());
         d.setNacionaldade(jTnacionalidade.getText());
+        
         cd.inserir(d);
         cg.inserir(g);
         cp.inserir(p);
         
+   
+        
+        
+        f.setTitulo(jTnome_filme.getText());
+        f.setAno_lancamento(Integer.valueOf(jTano_lancamento.getText()));
+        f.setDuracao_min(Integer.valueOf(jTduracao_filme.getText()));
+        f.setId_genero(g.getId_genero());
+        f.setId_diretor(d.getId_diretor());
+        f.setId_produtora(p.getId_produtora());
+        f.setId_usuario(us.getId_usuario());
+          
+        
+        
+      
+        
+        cf.inserir(f);
            
        }catch (Exception e) {
         
@@ -247,7 +274,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CadastrarFilme().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new CadastrarFilmeTela().setVisible(true));
         
     }
 

@@ -30,12 +30,12 @@ public class Genero {
         this.nome = nome;
     }
 
-    public String getDescrição() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descricao = descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
     
     
