@@ -151,7 +151,7 @@ public class CadastrarUsuario extends DAO {
         return usuarios;
     } 
    
-public void editarUsuario(Usuario u) throws Exception {
+    public void editarUsuario(Usuario u) throws Exception {
         abrirBanco();
         //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
         String query = "UPDATE usuario set nome = ?, email = ?, perfil = ? where id_usuario = ?";

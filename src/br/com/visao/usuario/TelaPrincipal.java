@@ -7,6 +7,7 @@ package br.com.visao;
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
 import br.com.controle.Usuario;
 import br.com.entidade.CadastrarUsuario;
+import br.com.visao.diretor.CadastrarFilme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -82,8 +83,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Ações dos botões (chame suas telas aqui)
         btnCadastrar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Cadastro de Filmes...");
-           CadastroUsuarioTela cf = new CadastroUsuarioTela();
-           cf.setVisible(true);
+            CadastrarFilme cf = new CadastrarFilme();
+            cf.setVisible(true);
         });
 
         btnListar.addActionListener(e -> {
