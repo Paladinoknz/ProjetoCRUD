@@ -6,7 +6,7 @@ package br.com.visao;
 
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
 import br.com.controle.Usuario;
-import br.com.entidade.CadastrarUsuario;
+//import br.com.entidade.CadastrarUsuario;
 import br.com.visao.filme.CadastrarFilmeTela;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -29,13 +29,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
     //Como um usuario nao podera excluir outros usuarios então a tela sera diferente para o perfil "Usuario"
     private String perfilUsuario = "Comum"; // Padrão como colaborador comum
 
-    
+    private Usuario usuarioLogado;
     //Botoes compostos no CRUD
     private JButton btnCadastrar;
     private JButton btnListar;
     private JButton btnAlterar;
     private JButton btnDeletar;
     private JButton btnExcluirUsuario;
+    
+   public void setUsuarioLogado(Usuario u) {
+    this.usuarioLogado = u; 
+   }
+   
+    public int getIdUsuarioLogado() {
+        if (usuarioLogado != null) {
+            return usuarioLogado.getId_usuario();
+        }
+        return 0;
+    }
+    
     
     //Iniciando a tela principal 
     public TelaPrincipal() {
@@ -83,7 +95,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Ações dos botões (chame suas telas aqui)
         btnCadastrar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Cadastro de Filmes...");
-            CadastrarFilmeTela cf = new CadastrarFilmeTela();
+            CadastrarFilmeTela cf = new CadastrarFilmeTela(); 
+            cf.setUsuarioLogado(this.usuarioLogado);
             cf.setVisible(true);
         });
 
@@ -182,11 +195,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         java.awt.EventQueue.invokeLater(() -> {
             try{
-            TelaPrincipal tela = new TelaPrincipal(); Usuario us = new Usuario(); CadastrarUsuario cdu = new CadastrarUsuario();
+            TelaPrincipal tela = new TelaPrincipal();
             // Teste mudando para "Admin" ou "Comum" aqui se quiser testar:
-            cdu.PesquisarRegistro(us);
-            tela.setPerfilUsuario(us.getPerfil());//pegando o get do id usuario e vendo aqui quais funcionalidades estarao disponives na tela principal.
-            tela.setVisible(true);
+            //pegando o get do id usuario e vendo aqui quais funcionalidades estarao disponives na tela principal.
+//            tela.setVisible(true);
             
             }
             

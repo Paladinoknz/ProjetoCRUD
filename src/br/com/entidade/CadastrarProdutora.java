@@ -23,7 +23,7 @@ import java.util.HashSet;
 
 public class CadastrarProdutora extends DAO  {
     
-     public void inserir(Produtora p) throws Exception {
+     public int inserir(Produtora p) throws Exception {
         abrirBanco();
         String existe = "select id_diretor,nome,nacionalidade FROM diretor where id_diretor=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
@@ -34,21 +34,28 @@ public class CadastrarProdutora extends DAO  {
             p.setId_produtora(tr.getInt("id_produtora"));
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO produtora (id_produtora,nome,pais_origem) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
-            pst = (PreparedStatement) con.prepareStatement(query);//prepara a query com valores faltando (???)
+            pst = (PreparedStatement) con.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);//prepara a query com valores faltando (???)
             //Esses 4 valores aqui preenche o buraco que o prepareStatement está esperando
             pst.setString(1, p.getNome());
             pst.setString(2, p.getPais());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
-            pst.execute();
-                if (rs.next()) {
-               p.setId_produtora(rs.getInt(1)); 
+//            p.setId_produtora(tr.getInt("id_produtora"));
+            pst.executeUpdate();
+               
+            // Pega o ID gerado pelo auto_increment do MySQL
+            ResultSet rsKeys = pst.getGeneratedKeys();
+            if (rsKeys.next()) {
+                p.setId_produtora(rsKeys.getInt(1));
+            }
 }
             JOptionPane.showMessageDialog(null, "Produtora do filme Inserido com sucesso!");
-        }
-                 ResultSet rs = pst.getGeneratedKeys();
+        
+
+                
     
    
         fecharBanco();
+        return p.getId_produtora();
     }
      
      
@@ -85,8 +92,8 @@ public class CadastrarProdutora extends DAO  {
 			p.setId_produtora(tr.getInt("id_produtora"));
 			p.setNome(tr.getString("nome"));
 			p.setPais(tr.getString("pais_origem"));
-            
-                        return p.getId_produtora();
+                         fecharBanco();
+                        return 1;
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");
@@ -96,6 +103,7 @@ public class CadastrarProdutora extends DAO  {
                return 0;
 	} catch (Exception e) {
 		System.out.println("Erro " + e.getMessage());
+                 fecharBanco();
 	return 5;
         }
     }

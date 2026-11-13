@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class CadastrarGenero extends DAO  {
     
-     public void inserir(Genero g) throws Exception {
+     public int inserir(Genero g) throws Exception {
         abrirBanco();
         String existe = "select id_genero,nome,descricao FROM genero where id_genero=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
@@ -34,21 +34,29 @@ public class CadastrarGenero extends DAO  {
             g.setId_genero(tr.getInt("id_genero"));
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO genero (id_genero,nome,descricao) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
-            pst = (PreparedStatement) con.prepareStatement(query);//prepara a query com valores faltando (???)
+            pst = (PreparedStatement) con.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);//prepara a query com valores faltando (???)
             //Esses 4 valores aqui preenche o buraco que o prepareStatement está esperando
             pst.setString(1, g.getNome());
             pst.setString(2, g.getDescricao());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
-            pst.execute();
+//            g.setId_genero(tr.getInt("id_genero"));
+            pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Descricão e genêro do filme Inseridas com sucesso!");
-               if (rs.next()) {
-        g.setId_genero(rs.getInt(1)); 
-}
+            
+            // Pega o ID gerado pelo auto_increment do MySQL
+            ResultSet rsKeys = pst.getGeneratedKeys();
+            if (rsKeys.next()) {
+                g.setId_genero(rsKeys.getInt(1));
+            }
         }
-             ResultSet rs = pst.getGeneratedKeys();
-     
-   
+        
+        
+        
+       
+        
         fecharBanco();
+        
+        return g.getId_genero();
     }
      
      
@@ -87,8 +95,9 @@ public class CadastrarGenero extends DAO  {
 			g.setId_genero(tr.getInt("id_genero"));
 			g.setNome(tr.getString("nome"));
 			g.setDescricao(tr.getString("descricao"));
+                         fecharBanco();
             
-                        return g.getId_genero();
+                        return 1;
                 //Se o banco ter qualquer outra resposta que nao satisfaça o primeiro if, tratamos o erro. 
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado! ");
@@ -98,6 +107,7 @@ public class CadastrarGenero extends DAO  {
                return 0;
 	} catch (Exception e) {
 		System.out.println("Erro " + e.getMessage());
+                 fecharBanco();
 	return 5;
         }
     }

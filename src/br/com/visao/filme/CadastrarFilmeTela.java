@@ -17,6 +17,7 @@ import br.com.entidade.CadastrarFilme;
 
 import com.sun.jdi.IntegerValue;
 import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,9 @@ import javax.swing.JOptionPane;
  */
 public class CadastrarFilmeTela extends javax.swing.JFrame {
     
+    private Usuario usuarioLogado;
+    
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastrarFilme.class.getName());
 
     /**
@@ -32,6 +36,14 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
      */
     public CadastrarFilmeTela() {
         initComponents();
+    }
+    
+    public void setUsuarioLogado(Usuario u) {
+        this.usuarioLogado = u;
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
     /**
@@ -202,10 +214,10 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
         // TODO add your handling code here:
        try{
            
-        CadastrarDiretor cd = new CadastrarDiretor(); CadastrarGenero cg = new CadastrarGenero(); CadastrarUsuario cdu = new CadastrarUsuario();
+        CadastrarDiretor cd = new CadastrarDiretor(); CadastrarGenero cg = new CadastrarGenero();
         CadastrarProdutora cp = new CadastrarProdutora(); CadastrarFilme cf = new CadastrarFilme();
         
-        Diretor d = new Diretor(); Genero g = new Genero();  Produtora p = new Produtora(); Filme f = new Filme(); Usuario us = new Usuario();
+        Diretor d = new Diretor(); Genero g = new Genero();  Produtora p = new Produtora(); Filme f = new Filme();
         
         
      
@@ -217,11 +229,13 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
         d.setNome(jTnome_diretor.getText());
         d.setNacionaldade(jTnacionalidade.getText());
         
-        cd.inserir(d);
-        cg.inserir(g);
-        cp.inserir(p);
+       int idGeradoCd = cd.inserir(d);
+       int idGeradoCg = cg.inserir(g);
+       int idGeradoCp = cp.inserir(p);
         
-   
+        d.setId_diretor(idGeradoCd);
+        g.setId_genero(idGeradoCg);
+        p.setId_produtora(idGeradoCp);
         
         
         f.setTitulo(jTnome_filme.getText());
@@ -230,7 +244,7 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
         f.setId_genero(g.getId_genero());
         f.setId_diretor(d.getId_diretor());
         f.setId_produtora(p.getId_produtora());
-        f.setId_usuario(us.getId_usuario());
+        f.setId_usuario(usuarioLogado.getId_usuario());
           
         
         

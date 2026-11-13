@@ -12,9 +12,9 @@ public class CadastrarFilme extends DAO {
 
     public void inserir(Filme f) throws Exception {
         abrirBanco();
-        String existe = "select id_filme,titulo,ano_lancamento FROM filme where id_filme=?";
+        String existe = "select id_filme,titulo,ano_lancamento FROM filme where titulo=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
-        pst.setInt(1, f.getId_filme());//passando como parametro o ID
+        pst.setString(1, f.getTitulo());//passando como parametro o ID
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
             JOptionPane.showMessageDialog(null, "Filme ja cadastrado anteriormente!");

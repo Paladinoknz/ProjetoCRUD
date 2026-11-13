@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class CadastrarUsuario extends DAO {
 
-    public void inserir(Usuario u) throws Exception {
+    public int inserir(Usuario u) throws Exception {
         abrirBanco();
         String existe = "select id_usuario,nome,email FROM usuario where email=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
@@ -24,20 +24,30 @@ public class CadastrarUsuario extends DAO {
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
             JOptionPane.showMessageDialog(null, "E-mail ja cadastrado anteriormente!");
+            ResultSet rsKeys = pst.getGeneratedKeys();
+            if (rsKeys.next()) {
+                u.setId_usuario(rsKeys.getInt(1));
+            }
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO usuario (id_usuario,nome,email,senha,perfil) values(null,?,?,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
-            pst = (PreparedStatement) con.prepareStatement(query);//prepara a query com valores faltando (???)
+            pst = (PreparedStatement) con.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);//prepara a query com valores faltando (???)
             //Esses 4 valores aqui preenche o buraco que o prepareStatement está esperando
             pst.setString(1, u.getNome());
             pst.setString(2, u.getEmail());
             pst.setString(3, u.getSenha());
             pst.setString(4, u.getPerfil());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
-            pst.execute();
+            pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Usuario Inserido com sucesso!");
+            
+            ResultSet rsKeys = pst.getGeneratedKeys();
+            if (rsKeys.next()) {
+                u.setId_usuario(rsKeys.getInt(1));
+            }
         }
 
         fecharBanco();
+        return u.getId_usuario();
     }
 
   
