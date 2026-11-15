@@ -39,7 +39,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
    public void setUsuarioLogado(Usuario u) {
     this.usuarioLogado = u; 
-   }
+   }//Pegando o usuario que veio de login
    
     public int getIdUsuarioLogado() {
         if (usuarioLogado != null) {

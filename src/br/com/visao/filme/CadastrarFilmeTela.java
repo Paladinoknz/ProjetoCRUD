@@ -221,18 +221,24 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
         
         
      
-        
+        //aqui pegamos o que o usuario digitou nas caixas livres e setamos nos objetos 
         p.setPais(jTpais_produtora.getText());
         p.setNome(jTnome_produtora.getText());
         g.setNome(jCgeneros.getSelectedItem().toString());
-        g.setDescricao(jTdescricao_filme.getText());
+        f.setDescricao(jTdescricao_filme.getText());
         d.setNome(jTnome_diretor.getText());
         d.setNacionaldade(jTnacionalidade.getText());
         
+        
+        //nessa parte eu capturo o retorno do metodo inserir, no caso
+        //o retorno é o ID que foi registrado no banco de dados
        int idGeradoCd = cd.inserir(d);
-       int idGeradoCg = cg.inserir(g);
+       int idGeradoCg = cg.PesquisarRegistro(g);
        int idGeradoCp = cp.inserir(p);
         
+       
+       //pego o ID que foi registrado no banco de dados e coloco como
+       //id aqui no meu objeto
         d.setId_diretor(idGeradoCd);
         g.setId_genero(idGeradoCg);
         p.setId_produtora(idGeradoCp);

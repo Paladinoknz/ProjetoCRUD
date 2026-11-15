@@ -14,6 +14,7 @@ public class Filme {
     private String titulo;
     private int ano_lancamento;
     private int duracao_min;
+    private String descricao;
     private int id_genero;
     private int id_diretor;
     private int id_produtora;
@@ -84,7 +85,13 @@ public class Filme {
     }
     
     
-    
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
     
     
     

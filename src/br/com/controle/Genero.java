@@ -12,7 +12,7 @@ public class Genero {
     
     private int id_genero;
     private String nome;
-    private String descricao;
+
 
     public int getId_genero() {
         return id_genero;
@@ -30,13 +30,6 @@ public class Genero {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
     
     
     
