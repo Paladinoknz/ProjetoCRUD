@@ -9,6 +9,7 @@ import br.com.controle.Usuario;
 import br.com.visao.FormDeletarUsuario;
 //import br.com.entidade.CadastrarUsuario;
 import br.com.visao.filme.CadastrarFilmeTela;
+import br.com.visao.filme.ListarFilmeTela;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -103,8 +104,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnListar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Listagem de Filmes...");
-            // FormListarFilmes fl = new FormListarFilmes();
-            // fl.setVisible(true);
+             ListarFilmeTela fl = new ListarFilmeTela();
+             fl.setVisible(true);
         });
 
         btnAlterar.addActionListener(e -> {

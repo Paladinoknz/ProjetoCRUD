@@ -82,6 +82,28 @@ public class CadastrarDiretor extends DAO  {
         
        
     }
+     
+     public ArrayList<Diretor> PesquisarTudo() throws Exception {
+    ArrayList<Diretor> diretores = new ArrayList<Diretor>();
+    try {
+        abrirBanco();
+        String query = "select * FROM diretor";
+        pst = (PreparedStatement) con.prepareStatement(query);
+        ResultSet tr = pst.executeQuery();
+        Diretor d;
+        while (tr.next()) {
+            d = new Diretor();
+            d.setId_diretor(tr.getInt("id_diretor"));
+            d.setNome(tr.getString("nome"));
+            d.setNacionaldade(tr.getString("nacionalidade"));
+            diretores.add(d);
+        }
+        fecharBanco();
+    } catch (Exception e) {
+        System.out.println("Erro " + e.getMessage());
+    }
+    return diretores;
+}
   
      
      

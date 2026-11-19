@@ -77,6 +77,33 @@ public class CadastrarProdutora extends DAO  {
     }
   
      
+     
+    public ArrayList<Produtora> PesquisarTudo() throws Exception {
+        ArrayList<Produtora> produtoras = new ArrayList<Produtora>();
+        try {
+            abrirBanco();
+            String query = "select * FROM produtora";
+            pst = (PreparedStatement) con.prepareStatement(query);
+            ResultSet tr = pst.executeQuery();
+            Produtora p;
+            while (tr.next()) {
+                p = new Produtora();
+                p.setId_produtora(tr.getInt("id_produtora"));
+                p.setNome(tr.getString("nome"));
+		p.setPais(tr.getString("pais_origem"));
+                produtoras.add(p);
+            }
+            fecharBanco();
+        } catch (Exception e) {
+            System.out.println("Erro " + e.getMessage());
+        }
+        return produtoras;
+    } 
+     
+     
+     
+     
+     
      public int PesquisarRegistro(Produtora p) throws Exception {
 	try {
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora

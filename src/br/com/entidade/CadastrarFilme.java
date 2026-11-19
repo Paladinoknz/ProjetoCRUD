@@ -137,12 +137,12 @@ public class CadastrarFilme extends DAO {
     public void editarFilme(Filme f) throws Exception {
         abrirBanco();
         //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
-        String query = "UPDATE filme set titulo = ?, ano_lancamento = ?, duracao_minutos = ?, descricao=?, where id_filme = ?";
+        String query = "UPDATE filme set titulo = ?, ano_lancamento = ?, duracao_minutos = ?, where id_filme = ?";
         pst = (PreparedStatement) con.prepareStatement(query);
         pst.setString(1, f.getTitulo());
         pst.setInt(2, f.getAno_lancamento());
         pst.setInt(3, f.getDuracao_min());
-        pst.setString(4, f.getDescricao());
+    
         pst.executeUpdate();
         JOptionPane.showMessageDialog(null, "Filme Alterado com sucesso!");
         fecharBanco();

@@ -79,6 +79,28 @@ public class CadastrarGenero extends DAO  {
         
        
     }
+     
+     public ArrayList<Genero> PesquisarTudo() throws Exception {
+    ArrayList<Genero> generos = new ArrayList<Genero>();
+    try {
+        abrirBanco();
+        String query = "select * FROM genero";
+        pst = (PreparedStatement) con.prepareStatement(query);
+        ResultSet tr = pst.executeQuery();
+        Genero g;
+        while (tr.next()) {
+            g = new Genero();
+            g.setId_genero(tr.getInt("id_genero"));
+            g.setNome(tr.getString("nome"));
+            generos.add(g);
+        }
+        fecharBanco();
+    } catch (Exception e) {
+        System.out.println("Erro " + e.getMessage());
+    }
+    return generos;
+}
+     
   
      
      //Esse metodo aqui serve apenas para colocarmos um ID unico pra cada genero, pra nao ficar
