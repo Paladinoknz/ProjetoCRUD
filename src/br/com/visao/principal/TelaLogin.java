@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package br.com.visao;
+package br.com.visao.principal;
 
 import br.com.controle.Usuario;
 import br.com.entidade.CadastrarUsuario;
+import br.com.visao.CadastroUsuarioTela;
 import java.util.HashSet;//o proprio netBeans colocou aqui uma biblioteca para criptografar a senha
 import java.util.Set;
 import javax.swing.JOptionPane;

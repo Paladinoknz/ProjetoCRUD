@@ -12,7 +12,7 @@ public class CadastrarFilme extends DAO {
 
     public void inserir(Filme f) throws Exception {
         abrirBanco();
-        String existe = "select id_filme,titulo,ano_lancamento, descricao FROM filme where titulo=?";
+        String existe = "select id_filme,titulo,ano_lancamento, duracao_minutos FROM filme where titulo=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
         pst.setString(1, f.getTitulo());//passando como parametro o ID
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
@@ -22,7 +22,7 @@ public class CadastrarFilme extends DAO {
             
             f.setId_filme(tr.getInt("id_filme"));
             f.setTitulo(tr.getString("titulo"));
-            f.setDescricao(tr.getString("descricao"));
+            f.setDescricao(tr.getString("ano_lancamento"));
             f.setDuracao_min(tr.getInt("duracao_minutos"));
             
             

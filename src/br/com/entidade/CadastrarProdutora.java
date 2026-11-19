@@ -25,12 +25,14 @@ public class CadastrarProdutora extends DAO  {
     
      public int inserir(Produtora p) throws Exception {
         abrirBanco();
-        String existe = "select id_diretor,nome,nacionalidade FROM diretor where id_diretor=?";
+        String existe = "select id_produtora, nome, pais_origem FROM produtora where nome=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
-        pst.setInt(1, p.getId_produtora());//passando como parametro o ID
+        pst.setString(1, p.getNome());//passando como parametro o ID
+        
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
+        
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
-            JOptionPane.showMessageDialog(null, "E-mail ja cadastrado anteriormente!");
+            JOptionPane.showMessageDialog(null, "Produtora vinculada ao filme!");
             p.setId_produtora(tr.getInt("id_produtora"));
         } else {//se ter o retorno de false, sinal que podemos inserir esse novo usuario.
             String query = "INSERT INTO produtora (id_produtora,nome,pais_origem) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
@@ -47,8 +49,8 @@ public class CadastrarProdutora extends DAO  {
             if (rsKeys.next()) {
                 p.setId_produtora(rsKeys.getInt(1));
             }
+            JOptionPane.showMessageDialog(null, "Nova produtora do filme Inserido com sucesso!");
 }
-            JOptionPane.showMessageDialog(null, "Produtora do filme Inserido com sucesso!");
         
 
                 

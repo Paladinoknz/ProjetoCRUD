@@ -1,4 +1,4 @@
-package br.com.visao;
+package br.com.visao.principal;
 
 //front-end, sou pessimo em mexer com isso, fiz usando auxilo da IA, mas vou comentar tudo
 //@kaioRamos
@@ -6,6 +6,7 @@ package br.com.visao;
 
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
 import br.com.controle.Usuario;
+import br.com.visao.FormDeletarUsuario;
 //import br.com.entidade.CadastrarUsuario;
 import br.com.visao.filme.CadastrarFilmeTela;
 import java.awt.BorderLayout;

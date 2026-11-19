@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -30,18 +32,15 @@ public class CadastrarDiretor extends DAO  {
         String existe = "select id_diretor,nome,nacionalidade FROM diretor where nome=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao
         pst.setString(1, d.getNome());//passando como parametro o nome
+        
+        
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe
-            JOptionPane.showMessageDialog(null, "Diretor cadastrado anteriormente!");
+            JOptionPane.showMessageDialog(null, "Diretor vinculado ao filme");
+           
+            d.setId_diretor(tr.getInt("id_diretor"));//Nessa linha como ja sabemos que existe um diretor
+            //simplemente pegamos o id que esse diretor tem, com isso em algumas linhas abaixos setamos nosso return
             
-            //bem, se ja existe entao apenas pegamos o ID cadastrado 
-            int idCadastrado = tr.getInt("id_diretor");
-            
-            //setamos no objeto que recebemos 
-            d.setId_diretor(idCadastrado);
-            
-            //e retornamos o Id
-            return d.getId_diretor();
             
         } else {//se ter o retorno de false, significa que nao existe e podemos inserir 
             String query = "INSERT INTO diretor (id_diretor,nome,nacionalidade) values(null,?,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement, entao nao precisamos colocar 
@@ -60,7 +59,7 @@ public class CadastrarDiretor extends DAO  {
                 d.setId_diretor(rsKeys.getInt(1));
             }
    
-            JOptionPane.showMessageDialog(null, "Diretor do filme Inserido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Novo diretor inserido com sucesso!");
         }
         
       

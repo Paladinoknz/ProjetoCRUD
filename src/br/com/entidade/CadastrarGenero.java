@@ -25,22 +25,28 @@ public class CadastrarGenero extends DAO  {
         abrirBanco();
         String existe = "select id_genero,nome FROM genero where nome=?";
         pst = (PreparedStatement) con.prepareStatement(existe);//preparando a query para validacao de usuario cadastrado
-        pst.setInt(1, g.getId_genero());//passando como parametro o ID
+        pst.setString(1, g.getNome());//passando como parametro o ID
         
         
         ResultSet tr = pst.executeQuery();//Executando e recebendo um retorno do banco
+        
         if (tr.next()) {//caso o tr.next for igual true entao é sinal que ja existe esse usuario
-            JOptionPane.showMessageDialog(null, "Genero cadastrado anteriormente!");
+            
+            JOptionPane.showMessageDialog(null, "Genero vinculado ao filme");
             g.setId_genero(tr.getInt("id_genero"));
-        } else {//se ter o retorno de false, sinal que podemos inserir.
+            
+            
+        }//se ter o retorno de false, sinal que podemos inserir.
+        else {
             String query = "INSERT INTO genero (id_genero,nome) values(null,?)";//primeiro paramentro é null por conta que o SQL tem o autoincrement 
+            
             pst = (PreparedStatement) con.prepareStatement(query, java.sql.Statement.RETURN_GENERATED_KEYS);//prepara a query com valores faltando (???)
             //Esses 4 valores aqui preenche o buraco que o prepareStatement está esperando
             pst.setString(1, g.getNome());
             //e essa linha .execute manda pro sql com tudo preenchido. Sem perigo de sql injection(o usuario inserir na mao a query e acessar o banco)
 //            g.setId_genero(tr.getInt("id_genero"));
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Genêro do filme Inseridas com sucesso!");
+            JOptionPane.showMessageDialog(null, "Novo genêro inserido com sucesso!");
             
             // Pega o ID gerado pelo auto_increment do MySQL
             ResultSet rsKeys = pst.getGeneratedKeys();
@@ -103,7 +109,7 @@ public class CadastrarGenero extends DAO  {
 		} else {
 			JOptionPane.showMessageDialog(null, "Nenhum resultado encontrado!\nInsira um novo genero");
                         fecharBanco();
-                       int idGerado =  inserir(g);
+                        int idGerado =  inserir(g);
                         return idGerado;
 		}
                 

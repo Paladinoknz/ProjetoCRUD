@@ -233,7 +233,7 @@ public class CadastrarFilmeTela extends javax.swing.JFrame {
         //nessa parte eu capturo o retorno do metodo inserir, no caso
         //o retorno é o ID que foi registrado no banco de dados
        int idGeradoCd = cd.inserir(d);
-       int idGeradoCg = cg.PesquisarRegistro(g);
+       int idGeradoCg = cg.inserir(g);//como so sao generos PRE definidos, entao pesquisamos o registro do genero que ja esta salvo
        int idGeradoCp = cp.inserir(p);
         
        
