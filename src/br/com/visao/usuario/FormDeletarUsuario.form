@@ -69,14 +69,14 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Digite o codigo do aluno a ser deletado:"/>
+        <Property name="text" type="java.lang.String" value="Digite o codigo do usuario a ser deletado:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcodigo">
     </Component>
     <Component class="javax.swing.JButton" name="jBdeletar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Deletar Aluno"/>
+        <Property name="text" type="java.lang.String" value="Deletar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBdeletarActionPerformed"/>

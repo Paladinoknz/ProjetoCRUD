@@ -108,6 +108,7 @@ public class CadastrarGenero extends DAO  {
      public int PesquisarRegistro(Genero g) throws Exception {
 	
          try {
+             
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
 		abrirBanco();
                 //Prepara a query que sera enviada para o banco
@@ -145,17 +146,7 @@ public class CadastrarGenero extends DAO  {
    
      
      
-     public void editarGenero(Genero g) throws Exception {
-        abrirBanco();
-        //JOptionPane.showMessageDialog(null, a.getNome()+ a.getEmail() + a.getIdade());
-        String query = "UPDATE genero set nome = ? where id_genero = ?";
-        pst = (PreparedStatement) con.prepareStatement(query);
-        pst.setString(1, g.getNome());
-        pst.setInt(3, g.getId_genero());
-        pst.executeUpdate();
-        JOptionPane.showMessageDialog(null, "Descrição Alterada com sucesso!");
-        fecharBanco();
-    }
+   
 } 
 
 

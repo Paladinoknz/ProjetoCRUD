@@ -40,9 +40,9 @@ public class FormDeletarUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Digite o codigo do aluno a ser deletado:");
+        jLabel1.setText("Digite o codigo do usuario a ser deletado:");
 
-        jBdeletar.setText("Deletar Aluno");
+        jBdeletar.setText("Deletar");
         jBdeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBdeletarActionPerformed(evt);

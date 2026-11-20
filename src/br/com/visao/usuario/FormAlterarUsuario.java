@@ -56,7 +56,7 @@ public class FormAlterarUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("E-mail");
 
-        jBalterar.setText("Atualizar Dados do Aluno");
+        jBalterar.setText("Atualizar Dados");
         jBalterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBalterarActionPerformed(evt);

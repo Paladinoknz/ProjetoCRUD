@@ -192,7 +192,7 @@ public class AlterarFilmeTela extends JFrame {
             f.setId_diretor(Integer.parseInt(txtIdDiretor.getText().trim()));
             f.setId_produtora(Integer.parseInt(txtIdProdutora.getText().trim()));
 
-            // TROQUE 'SuaClasseDAO' pelo nome da sua classe onde está o editarFilme(f)
+            
             CadastrarFilme cf = new CadastrarFilme();
             cf.editarFilme(f);
 
