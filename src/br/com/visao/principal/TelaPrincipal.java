@@ -9,6 +9,7 @@ import br.com.controle.Usuario;
 import br.com.visao.FormDeletarUsuario;
 //import br.com.entidade.CadastrarUsuario;
 import br.com.visao.filme.CadastrarFilmeTela;
+import br.com.visao.filme.DeletarFilmeTela;
 import br.com.visao.filme.ListarFilmeTela;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -116,8 +117,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnDeletar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Exclusão de Filme...");
-            // FormDeletarFilme da = new FormDeletarFilme();
-            // da.setVisible(true);
+             DeletarFilmeTela cft = new DeletarFilmeTela();
+             cft.setVisible(true);
         });
         
         btnExcluirUsuario.addActionListener(e -> {
