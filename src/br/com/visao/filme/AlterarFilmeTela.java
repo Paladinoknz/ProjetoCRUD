@@ -131,7 +131,16 @@ public class AlterarFilmeTela extends JFrame {
             txtAno.setText(String.valueOf(encontrado.getAno_lancamento()));
             txtDuracao.setText(String.valueOf(encontrado.getDuracao_min()));
             txtDescricao.setText(encontrado.getDescricao());
-            txtIdGenero.setText(String.valueOf(encontrado.getId_genero()));
+            
+            
+            //Fazendo a busca do nome do genero pelo ID armazenado em Filme.
+            CadastrarGenero cg = new CadastrarGenero();
+            Genero nomeGenero = new Genero();
+            nomeGenero.setId_genero(encontrado.getId_genero());
+            cg.PesquisarRegistro(nomeGenero);
+            
+            
+            txtIdGenero.setText(nomeGenero.getNome());
             txtIdDiretor.setText(String.valueOf(encontrado.getId_diretor()));
             txtIdProdutora.setText(String.valueOf(encontrado.getId_produtora()));
 
@@ -140,36 +149,36 @@ public class AlterarFilmeTela extends JFrame {
         }
     }
     
-    private String montarReferenciaIds() {
-    StringBuilder sb = new StringBuilder();
-
-    try {
-        
-        CadastrarGenero cg = new CadastrarGenero();
-        
-        // Exemplo chamando seus métodos separados (ajuste nomes/classes conforme o seu projeto):
-        sb.append("=== GÊNEROS ===\n");
-            for (Genero g : cg.PesquisarTudo()) {
-            sb.append("ID ").append(g.getId_genero()).append(" - ").append(g.getNome()).append("\n");
-         }
-
-        sb.append("\n=== DIRETORES ===\n");
-        // for (Diretor d : dao.listarDiretores()) {
-        //     sb.append("ID ").append(d.getId_diretor()).append(" - ").append(d.getNome()).append("\n");
-        // }
-
-        sb.append("\n=== PRODUTORAS ===\n");
-        // for (Produtora p : dao.listarProdutoras()) {
-        //     sb.append("ID ").append(p.getId_produtora()).append(" - ").append(p.getNome()).append("\n");
-        // }
-
-    } catch (Exception e) {
-        sb.append("Erro ao carregar opções: ").append(e.getMessage());
-    }
-
-    return sb.toString();
-}
-    
+//    private String montarReferenciaIds() {
+//    StringBuilder sb = new StringBuilder();
+//
+//    try {
+//        
+//        CadastrarGenero cg = new CadastrarGenero();
+//        
+//        // Exemplo chamando seus métodos separados (ajuste nomes/classes conforme o seu projeto):
+//        sb.append("=== GÊNEROS ===\n");
+//            for (Genero g : cg.PesquisarTudo()) {
+//            sb.append("ID ").append(g.getId_genero()).append(" - ").append(g.getNome()).append("\n");
+//         }
+//
+//        sb.append("\n=== DIRETORES ===\n");
+//        // for (Diretor d : dao.listarDiretores()) {
+//        //     sb.append("ID ").append(d.getId_diretor()).append(" - ").append(d.getNome()).append("\n");
+//        // }
+//
+//        sb.append("\n=== PRODUTORAS ===\n");
+//        // for (Produtora p : dao.listarProdutoras()) {
+//        //     sb.append("ID ").append(p.getId_produtora()).append(" - ").append(p.getNome()).append("\n");
+//        // }
+//
+//    } catch (Exception e) {
+//        sb.append("Erro ao carregar opções: ").append(e.getMessage());
+//    }
+//
+//    return sb.toString();
+//}
+//    
 
     private void salvarFilme() {
         try {

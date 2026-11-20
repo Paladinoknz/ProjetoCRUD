@@ -7,6 +7,7 @@ package br.com.visao.principal;
 //Bibliotecas para fazer frufru(deixar menos feio que o padrao), sao padrao java.
 import br.com.controle.Usuario;
 import br.com.visao.FormDeletarUsuario;
+import br.com.visao.filme.AlterarFilmeTela;
 //import br.com.entidade.CadastrarUsuario;
 import br.com.visao.filme.CadastrarFilmeTela;
 import br.com.visao.filme.DeletarFilmeTela;
@@ -111,8 +112,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         btnAlterar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Abrindo Alteração de Filme...");
-            // FormAlterarFilme fa = new FormAlterarFilme();
-            // fa.setVisible(true);
+             AlterarFilmeTela aft = new AlterarFilmeTela();
+             aft.setVisible(true);
         });
 
         btnDeletar.addActionListener(e -> {

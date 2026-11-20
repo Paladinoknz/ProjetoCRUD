@@ -111,11 +111,11 @@ public class CadastrarGenero extends DAO  {
             //Abre conexao com o banco a cada chamada do metodo para nao deixar o banco rodando toda hora
 		abrirBanco();
                 //Prepara a query que sera enviada para o banco
-		String query = "select id_genero,nome FROM genero where nome=?";
+		String query = "select id_genero,nome FROM genero where id_genero=?";
                 //faz a conexao com o banco esperando o "?" ser preenchido
 		pst = (PreparedStatement) con.prepareStatement(query);
                 //Preenche o primeiro(e unico) "?" pelo retorno do objeto u que traz o ID do usuario 
-		pst.setString(1, g.getNome());
+		pst.setInt(1, g.getId_genero());
                 //executa a query de fato e guarda a resposta do banco
 		ResultSet tr = pst.executeQuery();
                 //se o banco responder TRUE, siginifca que o usuario existe e ele nos da as colunas(que selecionamos na query) da tabela usuario.

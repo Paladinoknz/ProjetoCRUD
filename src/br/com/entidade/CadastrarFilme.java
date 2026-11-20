@@ -142,6 +142,7 @@ public class CadastrarFilme extends DAO {
         pst.setString(1, f.getTitulo());
         pst.setInt(2, f.getAno_lancamento());
         pst.setInt(3, f.getDuracao_min());
+        pst.setInt(4, f.getId_filme());
     
         pst.executeUpdate();
         JOptionPane.showMessageDialog(null, "Filme Alterado com sucesso!");
